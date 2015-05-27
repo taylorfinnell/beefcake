@@ -174,7 +174,7 @@ module Beefcake
 
     def define!(mt)
       puts
-      puts "class #{mt.name}"
+      puts "class #{klass_name(mt.name)}"
 
       indent do
         puts "include Beefcake::Message"
@@ -194,7 +194,7 @@ module Beefcake
 
     def message!(pkg, mt)
       puts
-      puts "class #{mt.name}"
+      puts "class #{klass_name(mt.name)}"
 
       indent do
         ## Generate Types
@@ -245,7 +245,7 @@ module Beefcake
       end
 
       # Finally, generate the declaration
-      out = "%s %s, %s, %d" % [label, name, type, f.number]
+      out = "%s %s, %s, %d" % [label, name, type_name(type), f.number]
 
       if f.default_value
         v = case f.type
@@ -309,5 +309,23 @@ module Beefcake
       end
     end
 
+    private
+
+    def type_name(name)
+      name = name.dup
+
+      pars = name.split('::').map do |klass|
+        klass[0] = klass[0].capitalize
+        klass
+      end
+
+      pars.join('::')
+    end
+
+    def klass_name(name)
+      name = name.dup
+      name[0] = name[0].capitalize
+      name
+    end
   end
 end
