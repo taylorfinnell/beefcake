@@ -216,7 +216,7 @@ module Beefcake
       puts "module #{et.name}"
       indent do
         et.value.each do |v|
-          puts "%s = %d" % [v.name, v.number]
+          puts "%s = %d" % [enum_name(name), v.number]
         end
       end
       puts "end"
@@ -326,6 +326,10 @@ module Beefcake
       name = name.dup
       name[0] = name[0].capitalize
       name
+    end
+
+    def enum_name(name)
+      klass_name(name)
     end
   end
 end
