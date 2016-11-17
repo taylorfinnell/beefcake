@@ -216,7 +216,7 @@ module Beefcake
       puts "module #{et.name}"
       indent do
         et.value.each do |v|
-          puts "%s = %d" % [enum_name(name), v.number]
+          puts "%s = %d" % [enum_name(v.name), v.number]
         end
       end
       puts "end"
